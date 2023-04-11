@@ -64,12 +64,12 @@ module.exports.PublishUserEvent = async (payload) => {
   });
 };
 
-module.exports.PublishShoppingEvent = async (payload) => {
-  // axios.post('http://gateway:8000/shopping/app-events/',{
+module.exports.PublishTweetEvent = async (payload) => {
+  // axios.post('http://gateway:8000/tweet/app-events/',{
   //         payload
   // });
 
-  axios.post(`http://shopping:8003/app-events/`, {
+  axios.post(`http://tweet:8003/app-events/`, {
     payload,
   });
 };

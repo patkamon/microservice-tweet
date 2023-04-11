@@ -23,11 +23,11 @@ services:
 
     env_file:
       - ./products/.env.dev
-  shopping:
+  tweet:
     build:
       dockerfile: Dockerfile
-      context: ./shopping
-    container_name: shopping
+      context: ./tweet
+    container_name: tweet
     ports:
       - "8003:8003"
     restart: always
@@ -35,9 +35,9 @@ services:
       - "nosql-db"
     volumes:
       - .:/app
-      - /app/shopping/node_modules
+      - /app/tweet/node_modules
     env_file:
-      - ./shopping/.env.dev
+      - ./tweet/.env.dev
   user:
     build:
       dockerfile: Dockerfile
@@ -60,7 +60,7 @@ services:
       context: ./proxy
     depends_on:
       - products
-      - shopping
+      - tweet
       - user
     ports:
       - 80:80

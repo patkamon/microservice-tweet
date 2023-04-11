@@ -1,6 +1,6 @@
 FROM node
 
-WORKDIR /app/shopping
+WORKDIR /app/tweet
 
 COPY package.json .
 

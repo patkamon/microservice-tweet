@@ -1,5 +1,5 @@
 // which service it is
-describe("ShoppingService", () => {
+describe("TweetService", () => {
   // Which function
   describe("PlaceOrder", () => {
     // Which Scenario we are testing

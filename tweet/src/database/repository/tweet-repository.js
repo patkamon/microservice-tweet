@@ -3,7 +3,7 @@ const { TweetModel, OrderModel } = require("../models");
 const { v4: uuidv4 } = require("uuid");
 
 //Dealing with data base operations
-class ShoppingRepository {
+class TweetRepository {
   async Tweet(userId) {
     const cartItems = await OrderModel.find({ userId: userId });
     if (cartItems) {
@@ -17,18 +17,17 @@ class ShoppingRepository {
     const cart = await OrderModel.findOne({ userId: userId });
 
     if (cart) {
-      let isExist = false;
-
       let cartItems = cart.tweet;
 
       if (cartItems.length > 0) {
         cartItems.map((item) => {
+          console.error(item, _id);
           if (item._id.toString() === _id.toString()) {
             cartItems.splice(cartItems.indexOf(item), 1);
-            isExist = true;
           }
         });
       }
+      console.log(cartItems);
 
       cart.tweet = cartItems;
 
@@ -65,8 +64,8 @@ class ShoppingRepository {
       tweet: [tweet],
     });
     await order.save();
-    return order;
+    return order.tweet[0];
   }
 }
 
-module.exports = ShoppingRepository;
+module.exports = TweetRepository;

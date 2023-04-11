@@ -1,10 +1,10 @@
-const { ShoppingRepository } = require("../database");
+const { TweetRepository } = require("../database");
 const { FormateData } = require("../utils");
 
 // All Business logic will be here
-class ShoppingService {
+class TweetService {
   constructor() {
-    this.repository = new ShoppingRepository();
+    this.repository = new TweetRepository();
   }
 
   async GetTweet({ _id }) {
@@ -18,6 +18,12 @@ class ShoppingService {
     const orderResult = await this.repository.CreateNewOrder(_id, msg);
 
     return FormateData(orderResult);
+  }
+
+  async Delete(_id, id) {
+    const deleteResult = await this.repository.Delete(_id, id);
+
+    return FormateData(deleteResult);
   }
 
   async SubscribeEvents(payload) {
@@ -51,4 +57,4 @@ class ShoppingService {
   }
 }
 
-module.exports = ShoppingService;
+module.exports = TweetService;

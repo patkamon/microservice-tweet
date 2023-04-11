@@ -1,7 +1,7 @@
-// const ShoppingService = require("../services/shopping-service");
+// const TweetService = require("../services/tweet-service");
 
 module.exports = (app) => {
-  // const service = new ShoppingService();
+  // const service = new TweetService();
   app.use("/app-events", async (req, res, next) => {
     const { payload } = req.body;
 

@@ -1,11 +1,11 @@
-const ShoppingService = require("../services/shopping-service");
+const TweetService = require("../services/tweet-service");
 const { SubscribeMessage } = require("../utils");
 const UserAuth = require("./middlewares/auth");
 const { USER_SERVICE } = require("../config");
 const { PublishMessage } = require("../utils");
 
 module.exports = (app, channel) => {
-  const service = new ShoppingService();
+  const service = new TweetService();
 
   SubscribeMessage(channel, service);
 
@@ -32,37 +32,12 @@ module.exports = (app, channel) => {
 
   app.delete("/tweet/:id", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
-
-    const { data } = await service.Delete(_id, req.body._id);
+    const { data } = await service.Delete(_id, req.params.id);
 
     res.status(200).json(data);
   });
 
-  //   app.put("/cart", UserAuth, async (req, res, next) => {
-  //     const { _id } = req.user;
-
-  //     const { data } = await service.AddToCart(_id, req.body._id);
-
-  //     res.status(200).json(data);
-  //   });
-
-  //   app.delete("/cart/:id", UserAuth, async (req, res, next) => {
-  //     const { _id } = req.user;
-
-  //     const { data } = await service.AddToCart(_id, req.body._id);
-
-  //     res.status(200).json(data);
-  //   });
-
-  //   app.get("/cart", UserAuth, async (req, res, next) => {
-  //     const { _id } = req.user;
-
-  //     const { data } = await service.GetCart({ _id });
-
-  //     return res.status(200).json(data);
-  //   });
-
   app.get("/whoami", (req, res, next) => {
-    return res.status(200).json({ msg: "/shoping : I am Shopping Service" });
+    return res.status(200).json({ msg: "/shoping : I am Tweet Service" });
   });
 };

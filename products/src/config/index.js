@@ -15,5 +15,5 @@ module.exports = {
   EXCHANGE_NAME: process.env.EXCHANGE_NAME,
   MSG_QUEUE_URL: process.env.MSG_QUEUE_URL,
   USER_SERVICE: "user_service",
-  SHOPPING_SERVICE: "shopping_service",
+  TWEET_SERVICE: "tweet_service",
 };

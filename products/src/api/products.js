@@ -1,4 +1,4 @@
-const { USER_SERVICE, SHOPPING_SERVICE } = require("../config");
+const { USER_SERVICE, TWEET_SERVICE } = require("../config");
 const ProductService = require("../services/product-service");
 const { PublishMessage } = require("../utils");
 const UserAuth = require("./middlewares/auth");
