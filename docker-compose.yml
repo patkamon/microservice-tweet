@@ -7,11 +7,11 @@ services:
     container_name: nosql-db
     volumes:
       - ./db/:/data/db
-  products:
+  retweet:
     build:
       dockerfile: Dockerfile
-      context: ./products
-    container_name: products
+      context: ./retweet
+    container_name: retweet
     ports:
       - "8002:8002"
     restart: always
@@ -19,10 +19,10 @@ services:
       - "nosql-db"
     volumes:
       - .:/app
-      - /app/products/node_modules
+      - /app/retweet/node_modules
 
     env_file:
-      - ./products/.env.dev
+      - ./retweet/.env.dev
   tweet:
     build:
       dockerfile: Dockerfile
@@ -59,7 +59,7 @@ services:
       dockerfile: Dockerfile
       context: ./proxy
     depends_on:
-      - products
+      - retweet
       - tweet
       - user
     ports:

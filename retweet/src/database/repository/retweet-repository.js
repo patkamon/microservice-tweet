@@ -3,7 +3,7 @@ const { RetweetModel, OrderModel } = require("../models");
 const { v4: uuidv4 } = require("uuid");
 
 //Dealing with data base operations
-class ProductRepository {
+class RetweetRepository {
   async Retweet(userId) {
     const cartItems = await OrderModel.find({ userId: userId });
     if (cartItems) {
@@ -19,15 +19,12 @@ class ProductRepository {
     const cart = await OrderModel.findOne({ userId: userId });
 
     if (cart) {
-      let isExist = false;
-
       let cartItems = cart.retweet;
 
       if (cartItems.length > 0) {
         cartItems.map((item) => {
           if (item._id.toString() === _id.toString()) {
             cartItems.splice(cartItems.indexOf(item), 1);
-            isExist = true;
           }
         });
       }
@@ -57,23 +54,6 @@ class ProductRepository {
 
       let cartItems = cart.retweet;
 
-      //   if (cartItems.length > 0) {
-      //process Order
-
-      // cartItems.map((item) => {
-      //   amount += parseInt(item.product.price) * parseInt(item.unit);
-      // });
-
-      // const order = new OrderModel({
-      //   orderId,
-      //   userId,
-      //   amount,
-      //   status: "received",
-      //   items: cartItems,
-      // });
-
-      // cart.items = [];
-
       cartItems.push(tweet);
       cart.retweet = cartItems;
 
@@ -87,8 +67,8 @@ class ProductRepository {
       retweet: [tweet],
     });
     await order.save();
-    return order;
+    return order.retweet[0];
   }
 }
 
-module.exports = ProductRepository;
+module.exports = RetweetRepository;

@@ -56,7 +56,7 @@ class UserRepository {
   }
 
   async AddTweetItem(userId, { _id, name, desc, img }) {
-    const product = {
+    const retweet = {
       _id,
       name,
       desc,
@@ -71,7 +71,7 @@ class UserRepository {
       if (wishlist.length > 0) {
         let isExist = false;
         wishlist.map((item) => {
-          if (item._id.toString() === product._id.toString()) {
+          if (item._id.toString() === retweet._id.toString()) {
             // no need to delete duplicate
             // const index = wishlist.indexOf(item);
             // wishlist.splice(index, 1);
@@ -80,10 +80,10 @@ class UserRepository {
         });
 
         if (!isExist) {
-          wishlist.push(product);
+          wishlist.push(retweet);
         }
       } else {
-        wishlist.push(product);
+        wishlist.push(retweet);
       }
 
       profile.tweet = wishlist;
@@ -99,7 +99,7 @@ class UserRepository {
 
   //     if (profile) {
   //       const cartItem = {
-  //         product: { _id, name, price, banner },
+  //         retweet: { _id, name, price, banner },
   //         unit: qty,
   //       };
 
@@ -108,7 +108,7 @@ class UserRepository {
   //       if (cartItems.length > 0) {
   //         let isExist = false;
   //         cartItems.map((item) => {
-  //           if (item.product._id.toString() === _id.toString()) {
+  //           if (item.retweet._id.toString() === _id.toString()) {
   //             if (isRemove) {
   //               cartItems.splice(cartItems.indexOf(item), 1);
   //             } else {
@@ -139,10 +139,20 @@ class UserRepository {
     if (profile) {
       if (profile.retweet == undefined) {
         profile.retweet = [];
+        profile.retweet.push(retweet._id);
+      } else {
+        let retweets = profile.retweet;
+        let isExist = false;
+        retweets.map((item) => {
+          if (item._id.toString() === retweet._id.toString()) {
+            retweets.splice(retweets.indexOf(item), 1);
+            isExist = true;
+          }
+        });
+        if (!isExist) {
+          profile.retweet.push(retweet._id);
+        }
       }
-      profile.retweet.push(retweet._id);
-
-      // profile.cart = [];
 
       const profileResult = await profile.save();
 

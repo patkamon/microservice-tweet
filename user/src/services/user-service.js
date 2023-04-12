@@ -91,8 +91,8 @@ class UserService {
     return FormateData(wishListItems);
   }
 
-  async AddToTweet(userId, product) {
-    const wishlistResult = await this.repository.AddTweetItem(userId, product);
+  async AddToTweet(userId, retweet) {
+    const wishlistResult = await this.repository.AddTweetItem(userId, retweet);
     return FormateData(wishlistResult);
   }
 
@@ -116,21 +116,21 @@ class UserService {
 
     const { event, data } = payload;
 
-    const { userId, product, order, qty } = data;
+    const { userId, retweet, order, qty } = data;
 
     switch (event) {
       case "ADD_TO_WISHLIST":
       case "REMOVE_FROM_WISHLIST":
-        this.AddToTweet(userId, product);
+        this.AddToTweet(userId, retweet);
         break;
-      // case "ADD_TO_CART": // add retweet
-      //   this.ManageCart(userId, product, qty, false);
-      //   break;
-      case "CREATE_CART": // add retweet
+      case "CREATE_RETWEET": // add retweet
+        this.ManageCart(userId, order);
+        break;
+      case "DELETE_RETWEET": // add retweet
         this.ManageCart(userId, order);
         break;
       case "REMOVE_FROM_CART":
-        this.ManageCart(userId, product, qty, true);
+        this.ManageCart(userId, retweet, qty, true);
         break;
       case "CREATE_ORDER": // add tweet
         this.ManageOrder(userId, order);

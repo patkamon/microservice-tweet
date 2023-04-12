@@ -1,10 +1,10 @@
-const { ProductRepository } = require("../database");
+const { RetweetRepository } = require("../database");
 const { FormateData } = require("../utils");
 
 // All Business logic will be here
-class ProductService {
+class RetweetService {
   constructor() {
-    this.repository = new ProductRepository();
+    this.repository = new RetweetRepository();
   }
 
   async GetRetweet({ _id }) {
@@ -23,18 +23,24 @@ class ProductService {
   async SubscribeEvents(payload) {
     payload = JSON.parse(payload);
     const { event, data } = payload;
-    const { userId, product, qty } = data;
+    const { userId, retweet, qty } = data;
 
     switch (event) {
       case "ADD_TO_CART":
-        this.ManageCart(userId, product, qty, false);
+        this.ManageCart(userId, retweet, qty, false);
         break;
       case "REMOVE_FROM_CART":
-        this.ManageCart(userId, product, qty, true);
+        this.ManageCart(userId, retweet, qty, true);
         break;
       default:
         break;
     }
+  }
+
+  async Delete(_id, id) {
+    const deleteResult = await this.repository.Delete(_id, id);
+
+    return FormateData(deleteResult);
   }
 
   async GetOrderPayload(userId, order, event) {
@@ -51,4 +57,4 @@ class ProductService {
   }
 }
 
-module.exports = ProductService;
+module.exports = RetweetService;

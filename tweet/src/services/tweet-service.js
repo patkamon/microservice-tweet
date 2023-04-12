@@ -29,14 +29,14 @@ class TweetService {
   async SubscribeEvents(payload) {
     payload = JSON.parse(payload);
     const { event, data } = payload;
-    const { userId, product, qty } = data;
+    const { userId, retweet, qty } = data;
 
     switch (event) {
       case "ADD_TO_CART":
-        this.ManageCart(userId, product, qty, false);
+        this.ManageCart(userId, retweet, qty, false);
         break;
       case "REMOVE_FROM_CART":
-        this.ManageCart(userId, product, qty, true);
+        this.ManageCart(userId, retweet, qty, true);
         break;
       default:
         break;
