@@ -15,7 +15,7 @@ module.exports = (app, channel) => {
 
     const { data } = await service.Tweet({ _id, msg });
 
-    const payload = await service.GetOrderPayload(_id, data, "CREATE_ORDER");
+    const payload = await service.GetOrderPayload(_id, data, "CREATE_TWEET");
 
     PublishMessage(channel, USER_SERVICE, JSON.stringify(payload));
 
@@ -33,6 +33,14 @@ module.exports = (app, channel) => {
   app.delete("/tweet/:id", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
     const { data } = await service.Delete(_id, req.params.id);
+
+    const payload = await service.GetOrderPayload(
+      _id,
+      { _id: req.params.id },
+      "DELETE_TWEET"
+    );
+
+    PublishMessage(channel, USER_SERVICE, JSON.stringify(payload));
 
     res.status(200).json(data);
   });
