@@ -1,0 +1,348 @@
+{
+	"info": {
+		"_postman_id": "732a1059-23a8-4bc4-8f35-42990e52511c",
+		"name": "Microservice Tweet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19431105"
+	},
+	"item": [
+		{
+			"name": "Tweet",
+			"item": [
+				{
+					"name": "All_My_Tweet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SHOPPING_BASE}}/shopping/cart",
+							"host": [
+								"{{SHOPPING_BASE}}"
+							],
+							"path": [
+								"shopping",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create_Tweet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"txnId\": \"afs25ww5\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SHOPPING_BASE}}/shopping/order",
+							"host": [
+								"{{SHOPPING_BASE}}"
+							],
+							"path": [
+								"shopping",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_Tweet",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SHOPPING_BASE}}/tweet/tweet/5d4cb423-9c33-4819-9957-e5d518ff1286",
+							"host": [
+								"{{SHOPPING_BASE}}"
+							],
+							"path": [
+								"tweet",
+								"tweet",
+								"5d4cb423-9c33-4819-9957-e5d518ff1286"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User_Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"test4@test.com\",\n    \"password\":\"12345\",\n    \"phone\":\"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CUSTOMER_BASE}}/customer/signup",
+							"host": [
+								"{{CUSTOMER_BASE}}"
+							],
+							"path": [
+								"customer",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User_Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"test4@test.com\",\n    \"password\":\"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CUSTOMER_BASE}}/user/login",
+							"host": [
+								"{{CUSTOMER_BASE}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User_Profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CUSTOMER_BASE}}/customer/profile",
+							"host": [
+								"{{CUSTOMER_BASE}}"
+							],
+							"path": [
+								"customer",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User_New_Profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"name\": \"Pat\", \n   \"desc\":\"I'm Thai\", \n   \"img\":\"URL\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CUSTOMER_BASE}}/user/profile",
+							"host": [
+								"{{CUSTOMER_BASE}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Retweet",
+			"item": [
+				{
+					"name": "retweet_create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Olive Oil\",\n    \"desc\":\"great Quality of Oil\",\n    \"type\":\"oils\",\n    \"banner\":\"http://codergogoi.com/youtube/images/oliveoil.jpg\",\n    \"unit\":1,\n    \"price\":400, \n    \"available\":true,\n    \"suplier\":\"Golden seed firming\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PRODUCTS_BASE}}/product/create",
+							"host": [
+								"{{PRODUCTS_BASE}}"
+							],
+							"path": [
+								"product",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All_My_Retweet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PRODUCTS_BASE}}/category/fruits",
+							"host": [
+								"{{PRODUCTS_BASE}}"
+							],
+							"path": [
+								"category",
+								"fruits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_Retweet",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PRODUCTS_BASE}}/cart/612cbc9ff201aa8b286fcd13",
+							"host": [
+								"{{PRODUCTS_BASE}}"
+							],
+							"path": [
+								"cart",
+								"612cbc9ff201aa8b286fcd13"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3Q0QHRlc3QuY29tIiwiX2lkIjoiNjQzNTYyNTBhMGI0ZTcwMDE0MWFmNWMxIiwiaWF0IjoxNjgxMjIwMTc2LCJleHAiOjE2ODM4MTIxNzZ9.RxRFO5BOpSMlXmQvat7UkdQsfXiVa5v-JpcTNX_9gF8",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "CUSTOMER_BASE",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "PRODUCT_BASE",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "SHOPPING_BASE",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
