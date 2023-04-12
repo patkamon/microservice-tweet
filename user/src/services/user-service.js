@@ -76,16 +76,6 @@ class UserService {
     return FormateData(existingUser);
   }
 
-  //   async GetShopingDetails(id) {
-  //     const existingUser = await this.repository.FindUserById({ id });
-
-  //     if (existingUser) {
-  //       // const orders = await this.shopingRepository.Orders(id);
-  //       return FormateData(existingUser);
-  //     }
-  //     return FormateData({ msg: "Error" });
-  //   }
-
   async GetTweet(userId) {
     const wishListItems = await this.repository.Tweet(userId);
     return FormateData(wishListItems);
@@ -96,17 +86,17 @@ class UserService {
     return FormateData(wishlistResult);
   }
 
-  async ManageCart(userId, retweet) {
-    const orderResult = await this.repository.AddRetweetToProfile(
+  async ManageRetweet(userId, retweet) {
+    const retweetResult = await this.repository.AddRetweetToProfile(
       userId,
       retweet
     );
-    return FormateData(orderResult);
+    return FormateData(retweetResult);
   }
 
-  async ManageOrder(userId, tweet) {
-    const orderResult = await this.repository.AddTweetToProfile(userId, tweet);
-    return FormateData(orderResult);
+  async ManageTweet(userId, tweet) {
+    const tweetResult = await this.repository.AddTweetToProfile(userId, tweet);
+    return FormateData(tweetResult);
   }
 
   async SubscribeEvents(payload) {
@@ -116,27 +106,21 @@ class UserService {
 
     const { event, data } = payload;
 
-    const { userId, retweet, order, qty } = data;
+    const { userId, retweet, tweet } = data;
+    console.error(data);
 
     switch (event) {
-      // case "ADD_TO_WISHLIST":
-      // case "REMOVE_FROM_WISHLIST":
-      //   this.AddToTweet(userId, retweet);
-      //   break;
       case "CREATE_RETWEET": // add retweet
-        this.ManageCart(userId, order);
+        this.ManageRetweet(userId, retweet);
         break;
       case "DELETE_RETWEET": // delete retweet
-        this.ManageCart(userId, order);
+        this.ManageRetweet(userId, retweet);
         break;
-      // case "REMOVE_FROM_CART":
-      //   this.ManageCart(userId, retweet, qty, true);
-      //   break;
       case "CREATE_TWEET": // add tweet
-        this.ManageOrder(userId, order);
+        this.ManageTweet(userId, tweet);
         break;
       case "DELETE_TWEET": // delete tweet
-        this.ManageOrder(userId, order);
+        this.ManageTweet(userId, tweet);
         break;
       default:
         break;

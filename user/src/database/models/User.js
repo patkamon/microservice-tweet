@@ -12,21 +12,6 @@ const UserSchema = new Schema(
     profile: [{ type: Schema.Types.ObjectId, ref: "profile", require: true }],
     tweet: [{ _id: { type: String, require: true } }],
     retweet: [{ _id: { type: String, require: true } }],
-    // profile: [
-    //   {
-    //     _id: { type: String, require: true },
-    //     name: { type: String },
-    //     description: { type: String },
-    //     img: { type: String },
-    //   },
-    // ],
-    // orders: [
-    //   {
-    //     _id: { type: String, required: true },
-    //     amount: { type: String },
-    //     date: { type: Date, default: Date.now() },
-    //   },
-    // ],
   },
   {
     toJSON: {

@@ -5,42 +5,42 @@ const { v4: uuidv4 } = require("uuid");
 //Dealing with data base operations
 class TweetRepository {
   async Tweet(userId) {
-    const cartItems = await OrderModel.find({ userId: userId });
-    if (cartItems) {
-      return cartItems;
+    const tweetItems = await OrderModel.find({ userId: userId });
+    if (tweetItems) {
+      return tweetItems;
     }
 
     throw new Error("Data Not found!");
   }
 
   async Delete(userId, _id) {
-    const cart = await OrderModel.findOne({ userId: userId });
+    const tweets = await OrderModel.findOne({ userId: userId });
 
-    if (cart) {
-      let cartItems = cart.tweet;
+    if (tweets) {
+      let tweetItems = tweets.tweet;
 
-      if (cartItems.length > 0) {
-        cartItems.map((item) => {
+      if (tweetItems.length > 0) {
+        tweetItems.map((item) => {
           console.error(item, _id);
           if (item._id.toString() === _id.toString()) {
-            cartItems.splice(cartItems.indexOf(item), 1);
+            tweetItems.splice(tweetItems.indexOf(item), 1);
           }
         });
       }
-      console.log(cartItems);
+      console.log(tweetItems);
 
-      cart.tweet = cartItems;
+      tweets.tweet = tweetItems;
 
-      return await cart.save();
+      return await tweets.save();
     } else {
       return [];
     }
   }
 
-  async CreateNewOrder(userId, msg) {
+  async CreateNewTweet(userId, msg) {
     //required to verify payment through TxnId
 
-    const cart = await OrderModel.findOne({ userId: userId });
+    const tweets = await OrderModel.findOne({ userId: userId });
     const _id = uuidv4();
     const tweet = new TweetModel({
       userId,
@@ -48,23 +48,22 @@ class TweetRepository {
       msg,
     });
 
-    if (cart) {
-      let cartItems = cart.tweet;
+    if (tweets) {
+      let tweetItems = tweets.tweet;
 
-      cartItems.push(tweet);
-      cart.tweet = cartItems;
+      tweetItems.push(tweet);
+      tweets.tweet = tweetItems;
 
-      const orderResult = await tweet.save();
-      await cart.save();
-      return orderResult;
-      //   }
+      const tweetResult = await tweet.save();
+      await tweets.save();
+      return tweetResult;
     }
-    const order = new OrderModel({
+    const newTweet = new OrderModel({
       userId,
       tweet: [tweet],
     });
-    await order.save();
-    return order.tweet[0];
+    await newTweet.save();
+    return newTweet.tweet[0];
   }
 }
 

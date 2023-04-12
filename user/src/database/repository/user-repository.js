@@ -41,11 +41,6 @@ class UserRepository {
 
   async FindUserById({ id }) {
     const existingUser = await UserModel.findById(id).populate("profile");
-    // existingUser.cart = [];
-    // existingUser.orders = [];
-    // existingUser.wishlist = [];
-
-    // await existingUser.save();
     return existingUser;
   }
 
@@ -57,7 +52,6 @@ class UserRepository {
 
   async AddTweetToProfile(userId, tweet) {
     const profile = await UserModel.findById(userId);
-
     if (profile) {
       if (profile.tweet == undefined) {
         profile.tweet = [];
@@ -72,7 +66,7 @@ class UserRepository {
           }
         });
         if (!isExist) {
-          profile.tweet.push(retweet._id);
+          profile.tweet.push(tweet._id);
         }
       }
 
@@ -112,25 +106,6 @@ class UserRepository {
 
     throw new Error("Unable to add to retweet!");
   }
-
-  // async AddOrderToProfile(userId, tweet) {
-  //   const profile = await UserModel.findById(userId);
-
-  //   if (profile) {
-  //     if (profile.tweet == undefined) {
-  //       profile.tweet = [];
-  //     }
-  //     profile.tweet.push(tweet._id);
-
-  //     // profile.cart = [];
-
-  //     const profileResult = await profile.save();
-
-  //     return profileResult;
-  //   }
-
-  //   throw new Error("Unable to add to order!");
-  // }
 }
 
 module.exports = UserRepository;

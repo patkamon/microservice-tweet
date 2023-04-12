@@ -8,34 +8,34 @@ class RetweetService {
   }
 
   async GetRetweet({ _id }) {
-    const cartItems = await this.repository.Retweet(_id);
-    return FormateData(cartItems);
+    const retweetItems = await this.repository.Retweet(_id);
+    return FormateData(retweetItems);
   }
 
   async Retweet(userInput) {
     const { _id, id, msg } = userInput;
 
-    const orderResult = await this.repository.CreateNewOrder(_id, id, msg);
+    const retweetResult = await this.repository.CreateNewRetweet(_id, id, msg);
 
-    return FormateData(orderResult);
+    return FormateData(retweetResult);
   }
 
-  async SubscribeEvents(payload) {
-    payload = JSON.parse(payload);
-    const { event, data } = payload;
-    const { userId, retweet, qty } = data;
+  // async SubscribeEvents(payload) {
+  //   payload = JSON.parse(payload);
+  //   const { event, data } = payload;
+  //   const { userId, retweet, qty } = data;
 
-    switch (event) {
-      case "ADD_TO_CART":
-        this.ManageCart(userId, retweet, qty, false);
-        break;
-      case "REMOVE_FROM_CART":
-        this.ManageCart(userId, retweet, qty, true);
-        break;
-      default:
-        break;
-    }
-  }
+  //   switch (event) {
+  //     case "ADD_TO_CART":
+  //       this.ManageCart(userId, retweet, qty, false);
+  //       break;
+  //     case "REMOVE_FROM_CART":
+  //       this.ManageCart(userId, retweet, qty, true);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }
 
   async Delete(_id, id) {
     const deleteResult = await this.repository.Delete(_id, id);
@@ -43,16 +43,16 @@ class RetweetService {
     return FormateData(deleteResult);
   }
 
-  async GetOrderPayload(userId, order, event) {
-    if (order) {
+  async GetOrderPayload(userId, retweet, event) {
+    if (retweet) {
       const payload = {
         event: event,
-        data: { userId, order },
+        data: { userId, retweet },
       };
 
       return payload;
     } else {
-      return FormateData({ error: "No Order Available" });
+      return FormateData({ error: "No Retweet Available" });
     }
   }
 }

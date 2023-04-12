@@ -5,69 +5,65 @@ const { v4: uuidv4 } = require("uuid");
 //Dealing with data base operations
 class RetweetRepository {
   async Retweet(userId) {
-    const cartItems = await OrderModel.find({ userId: userId });
-    if (cartItems) {
-      return cartItems;
+    const retweetItems = await OrderModel.find({ userId: userId });
+    if (retweetItems) {
+      return retweetItems;
     }
 
     throw new Error("Data Not found!");
   }
 
   async Delete(userId, _id) {
-    // return await CartModel.deleteMany();
+    const retweet = await OrderModel.findOne({ userId: userId });
 
-    const cart = await OrderModel.findOne({ userId: userId });
+    if (retweet) {
+      let retweetItems = retweet.retweet;
 
-    if (cart) {
-      let cartItems = cart.retweet;
-
-      if (cartItems.length > 0) {
-        cartItems.map((item) => {
+      if (retweetItems.length > 0) {
+        retweetItems.map((item) => {
           if (item._id.toString() === _id.toString()) {
-            cartItems.splice(cartItems.indexOf(item), 1);
+            retweetItems.splice(retweetItems.indexOf(item), 1);
           }
         });
       }
 
-      cart.retweet = cartItems;
+      retweet.retweet = retweetItems;
 
-      return await cart.save();
+      return await retweet.save();
     } else {
       return [];
     }
   }
 
-  async CreateNewOrder(userId, id, msg) {
+  async CreateNewRetweet(userId, id, msg) {
     //required to verify payment through TxnId
 
-    const cart = await OrderModel.findOne({ userId: userId });
+    const retweets = await OrderModel.findOne({ userId: userId });
     const _id = uuidv4();
-    const tweet = new RetweetModel({
+    const retweet = new RetweetModel({
       userId,
       _id,
       id,
       msg,
     });
 
-    if (cart) {
-      //   let amount = 0;
+    if (retweets) {
+      let retweetItems = retweets.retweet;
 
-      let cartItems = cart.retweet;
+      retweetItems.push(retweet);
+      retweets.retweet = retweetItems;
 
-      cartItems.push(tweet);
-      cart.retweet = cartItems;
-
-      const orderResult = await tweet.save();
-      await cart.save();
-      return orderResult;
+      const retweetResult = await retweet.save();
+      await retweets.save();
+      return retweetResult;
       //   }
     }
-    const order = new OrderModel({
+    const newRetweet = new OrderModel({
       userId,
-      retweet: [tweet],
+      retweet: [retweet],
     });
-    await order.save();
-    return order.retweet[0];
+    await newRetweet.save();
+    return newRetweet.retweet[0];
   }
 }
 

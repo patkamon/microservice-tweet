@@ -8,16 +8,16 @@ class TweetService {
   }
 
   async GetTweet({ _id }) {
-    const cartItems = await this.repository.Tweet(_id);
-    return FormateData(cartItems);
+    const tweetItems = await this.repository.Tweet(_id);
+    return FormateData(tweetItems);
   }
 
   async Tweet(userInput) {
     const { _id, msg } = userInput;
 
-    const orderResult = await this.repository.CreateNewOrder(_id, msg);
+    const tweetResult = await this.repository.CreateNewTweet(_id, msg);
 
-    return FormateData(orderResult);
+    return FormateData(tweetResult);
   }
 
   async Delete(_id, id) {
@@ -26,33 +26,33 @@ class TweetService {
     return FormateData(deleteResult);
   }
 
-  async SubscribeEvents(payload) {
-    payload = JSON.parse(payload);
-    const { event, data } = payload;
-    const { userId, retweet, qty } = data;
+  // async SubscribeEvents(payload) {
+  //   payload = JSON.parse(payload);
+  //   const { event, data } = payload;
+  //   const { userId, retweet, qty } = data;
 
-    switch (event) {
-      case "ADD_TO_CART":
-        this.ManageCart(userId, retweet, qty, false);
-        break;
-      case "REMOVE_FROM_CART":
-        this.ManageCart(userId, retweet, qty, true);
-        break;
-      default:
-        break;
-    }
-  }
+  //   switch (event) {
+  //     case "ADD_TO_CART":
+  //       this.ManageCart(userId, retweet, qty, false);
+  //       break;
+  //     case "REMOVE_FROM_CART":
+  //       this.ManageCart(userId, retweet, qty, true);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }
 
-  async GetOrderPayload(userId, order, event) {
-    if (order) {
+  async GetOrderPayload(userId, tweet, event) {
+    if (tweet) {
       const payload = {
         event: event,
-        data: { userId, order },
+        data: { userId, tweet },
       };
 
       return payload;
     } else {
-      return FormateData({ error: "No Order Available" });
+      return FormateData({ error: "No Tweet Available" });
     }
   }
 }

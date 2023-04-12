@@ -4,10 +4,7 @@ const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema(
   {
-    // orderId: { type: String },
     userId: { type: String },
-    // amount: { type: Number },
-    // status: { type: String },
     retweet: [
       {
         userId: String,

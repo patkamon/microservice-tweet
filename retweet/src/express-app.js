@@ -10,11 +10,9 @@ module.exports = async (app) => {
   app.use(cors());
   app.use(express.static(__dirname + "/public"));
 
-  //api
-  // appEvents(app);
+ 
 
   const channel = await CreateChannel();
   retweet(app, channel);
 
-  // error handling
 };
