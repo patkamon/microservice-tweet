@@ -108,12 +108,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{CUSTOMER_BASE}}/customer/signup",
+							"raw": "http://localhost:80/user/signup",
+							"protocol": "http",
 							"host": [
-								"{{CUSTOMER_BASE}}"
+								"localhost"
 							],
+							"port": "80",
 							"path": [
-								"customer",
+								"user",
 								"signup"
 							]
 						}
@@ -135,10 +137,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{CUSTOMER_BASE}}/user/login",
+							"raw": "http://localhost:80/user/login",
+							"protocol": "http",
 							"host": [
-								"{{CUSTOMER_BASE}}"
+								"localhost"
 							],
+							"port": "80",
 							"path": [
 								"user",
 								"login"
@@ -165,12 +169,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{CUSTOMER_BASE}}/customer/profile",
+							"raw": "http://localhost:80/user/profile",
+							"protocol": "http",
 							"host": [
-								"{{CUSTOMER_BASE}}"
+								"localhost"
 							],
+							"port": "80",
 							"path": [
-								"customer",
+								"user",
 								"profile"
 							]
 						}
@@ -192,10 +198,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{CUSTOMER_BASE}}/user/profile",
+							"raw": "http://localhost:80/user/profile",
+							"protocol": "http",
 							"host": [
-								"{{CUSTOMER_BASE}}"
+								"localhost"
 							],
+							"port": "80",
 							"path": [
 								"user",
 								"profile"
@@ -236,7 +244,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\":\"Olive Oil\",\n    \"desc\":\"great Quality of Oil\",\n    \"type\":\"oils\",\n    \"banner\":\"http://codergogoi.com/youtube/images/oliveoil.jpg\",\n    \"unit\":1,\n    \"price\":400, \n    \"available\":true,\n    \"suplier\":\"Golden seed firming\"\n}",
+							"raw": "{\n    \"msg\": \"hello2\",\n    \"id\": \"13b0e584-9823-4855-825d-70d9ffd8965e\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -244,13 +252,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{PRODUCTS_BASE}}/product/create",
+							"raw": "http://localhost:80/retweet",
+							"protocol": "http",
 							"host": [
-								"{{PRODUCTS_BASE}}"
+								"localhost"
 							],
+							"port": "80",
 							"path": [
-								"product",
-								"create"
+								"retweet"
 							]
 						}
 					},
@@ -262,13 +271,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{PRODUCTS_BASE}}/category/fruits",
+							"raw": "http://localhost:80/retweet",
+							"protocol": "http",
 							"host": [
-								"{{PRODUCTS_BASE}}"
+								"localhost"
 							],
+							"port": "80",
 							"path": [
-								"category",
-								"fruits"
+								"retweet"
 							]
 						}
 					},
@@ -337,20 +347,5 @@
 		}
 	],
 	"variable": [
-		{
-			"key": "CUSTOMER_BASE",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "PRODUCT_BASE",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "SHOPPING_BASE",
-			"value": "",
-			"type": "string"
-		}
 	]
 }
