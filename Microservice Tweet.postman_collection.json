@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "732a1059-23a8-4bc4-8f35-42990e52511c",
+		"_postman_id": "8a4050f7-c137-430d-9719-98fe96bf743a",
 		"name": "Microservice Tweet",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "19431105"
@@ -15,7 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:80/tweet/tweet",
+							"raw": "http://localhost:80/tweet/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -23,7 +23,7 @@
 							"port": "80",
 							"path": [
 								"tweet",
-								"tweet"
+								""
 							]
 						}
 					},
@@ -44,7 +44,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:80/tweet/tweet",
+							"raw": "http://localhost:80/tweet/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -52,7 +52,7 @@
 							"port": "80",
 							"path": [
 								"tweet",
-								"tweet"
+								""
 							]
 						}
 					},
@@ -73,7 +73,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:80/tweet/tweet/6798be46-e9b1-4287-a353-fee0bd59386a",
+							"raw": "http://localhost:80/tweet/f255a6e9-5e9b-40db-976b-a4324e8a944a",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -81,8 +81,99 @@
 							"port": "80",
 							"path": [
 								"tweet",
+								"f255a6e9-5e9b-40db-976b-a4324e8a944a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All_Tweet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:80/tweet/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "80",
+							"path": [
 								"tweet",
-								"6798be46-e9b1-4287-a353-fee0bd59386a"
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tweet_By_ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:80/tweet/id/4ebd88ea-8221-4cc4-9c7d-1ff71d8d6cb8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "80",
+							"path": [
+								"tweet",
+								"id",
+								"4ebd88ea-8221-4cc4-9c7d-1ff71d8d6cb8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Like_Tweet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:80/tweet/like/f255a6e9-5e9b-40db-976b-a4324e8a944a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "80",
+							"path": [
+								"tweet",
+								"like",
+								"f255a6e9-5e9b-40db-976b-a4324e8a944a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment_Tweet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"msg\": \"hello\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:80/tweet/comment/4ebd88ea-8221-4cc4-9c7d-1ff71d8d6cb8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "80",
+							"path": [
+								"tweet",
+								"comment",
+								"4ebd88ea-8221-4cc4-9c7d-1ff71d8d6cb8"
 							]
 						}
 					},
@@ -100,7 +191,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"test4@test.com\",\n    \"password\":\"12345\",\n    \"phone\":\"12345\"\n}",
+							"raw": "{\n    \"email\":\"test2@test.com\",\n    \"password\":\"12345\",\n    \"phone\":\"12345\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -211,6 +302,47 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "User_Profile_By_ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:80/user/profile/64398487581cf10014f78e74",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "80",
+							"path": [
+								"user",
+								"profile",
+								"64398487581cf10014f78e74"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All_User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:80/user/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "80",
+							"path": [
+								"user",
+								"all"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"event": [
@@ -252,14 +384,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:80/retweet",
+							"raw": "http://localhost:80/retweet/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "80",
 							"path": [
-								"retweet"
+								"retweet",
+								""
 							]
 						}
 					},
@@ -271,14 +404,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:80/retweet",
+							"raw": "http://localhost:80/retweet/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "80",
 							"path": [
-								"retweet"
+								"retweet",
+								""
 							]
 						}
 					},
@@ -312,6 +446,98 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "All_Retweet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:80/retweet/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "80",
+							"path": [
+								"retweet",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retweet_By_ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:80/retweet/id/9d3b2e45-3a53-45b8-adad-6a8fae80dc8b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "80",
+							"path": [
+								"retweet",
+								"id",
+								"9d3b2e45-3a53-45b8-adad-6a8fae80dc8b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Like_Retweet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:80/retweet/like/74c73810-9302-461a-bc3c-47579e4c11f8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "80",
+							"path": [
+								"retweet",
+								"like",
+								"74c73810-9302-461a-bc3c-47579e4c11f8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment_Retweet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"msg\": \"hello\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:80/retweet/comment/74c73810-9302-461a-bc3c-47579e4c11f8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "80",
+							"path": [
+								"retweet",
+								"comment",
+								"74c73810-9302-461a-bc3c-47579e4c11f8"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
@@ -321,7 +547,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3Q0QHRlc3QuY29tIiwiX2lkIjoiNjQzNTYyNTBhMGI0ZTcwMDE0MWFmNWMxIiwiaWF0IjoxNjgxMjIwMTc2LCJleHAiOjE2ODM4MTIxNzZ9.RxRFO5BOpSMlXmQvat7UkdQsfXiVa5v-JpcTNX_9gF8",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QyQHRlc3QuY29tIiwiX2lkIjoiNjQzOTc5N2MzMjRjNGUwMDEzNjE4NDhlIiwiaWF0IjoxNjgxNDg4MjUyLCJleHAiOjE2ODQwODAyNTJ9.sUuigDIqHPfSWRtqHO1NHOprIak2I4561zL8sd_EH8E",
 				"type": "string"
 			}
 		]
@@ -345,7 +571,5 @@
 				]
 			}
 		}
-	],
-	"variable": [
 	]
 }
