@@ -22,6 +22,23 @@ module.exports = (app, channel) => {
     res.status(200).json(data);
   });
 
+  app.put("/like/:id", UserAuth, async (req, res, next) => {
+    const { _id } = req.user;
+
+    const { data } = await service.LikeRetweet(_id, req.params.id);
+
+    res.status(200).json(data);
+  });
+
+  app.put("/comment/:id", UserAuth, async (req, res, next) => {
+    const { _id } = req.user;
+    const { msg } = req.body;
+
+    const { data } = await service.CommentRetweet(_id, req.params.id, msg);
+
+    res.status(200).json(data);
+  });
+
   app.get("", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
 

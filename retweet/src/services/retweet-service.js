@@ -12,6 +12,16 @@ class RetweetService {
     return FormateData(retweetItems);
   }
 
+  async LikeRetweet(_id, id) {
+    const tweetItems = await this.repository.LikeRetweet(_id, id);
+    return FormateData(tweetItems);
+  }
+
+  async CommentRetweet(_id, id, msg) {
+    const tweetItems = await this.repository.CommentRetweet(_id, id, msg);
+    return FormateData(tweetItems);
+  }
+
   async SpecificRetweet(_id) {
     const retweetItems = await this.repository.SpecificRetweet(_id);
     return FormateData(retweetItems);

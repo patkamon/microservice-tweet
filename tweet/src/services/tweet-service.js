@@ -7,6 +7,16 @@ class TweetService {
     this.repository = new TweetRepository();
   }
 
+  async LikeTweet(_id, id) {
+    const tweetItems = await this.repository.LikeTweet(_id, id);
+    return FormateData(tweetItems);
+  }
+
+  async CommentTweet(_id, id, msg) {
+    const tweetItems = await this.repository.CommentTweet(_id, id, msg);
+    return FormateData(tweetItems);
+  }
+
   async GetTweet({ _id }) {
     const tweetItems = await this.repository.Tweet(_id);
     return FormateData(tweetItems);
@@ -23,9 +33,14 @@ class TweetService {
   }
 
   async Tweet(userInput) {
-    const { _id, msg } = userInput;
+    const { _id, msg, photo, video } = userInput;
 
-    const tweetResult = await this.repository.CreateNewTweet(_id, msg);
+    const tweetResult = await this.repository.CreateNewTweet(
+      _id,
+      msg,
+      photo,
+      video
+    );
 
     return FormateData(tweetResult);
   }

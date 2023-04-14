@@ -10,6 +10,8 @@ const OrderSchema = new Schema(
         userId: String,
         _id: String,
         msg: String,
+        like_count: { type: Number },
+        like: [{ type: String }],
       },
     ],
   },
