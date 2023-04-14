@@ -22,6 +22,11 @@ module.exports = (app, channel) => {
     res.status(200).json(data);
   });
 
+  app.get("/id/:id", async (req, res, next) => {
+    const { data } = await service.SpecificTweet({ _id: req.params.id });
+    res.status(200).json(data);
+  });
+
   app.get("", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
 

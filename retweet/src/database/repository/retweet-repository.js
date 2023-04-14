@@ -13,6 +13,15 @@ class RetweetRepository {
     throw new Error("Data Not found!");
   }
 
+  async SpecificRetweet(id) {
+    const retweetItems = await RetweetModel.find(id);
+    if (retweetItems) {
+      return retweetItems;
+    }
+
+    throw new Error("Data Not found!");
+  }
+
   async AllRetweet() {
     const retweetItems = await RetweetModel.find()
       .sort({ $natural: -1 })

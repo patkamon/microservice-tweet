@@ -38,12 +38,10 @@ module.exports = (app, channel) => {
     res.json(data);
   });
 
-  //   app.get("/shoping-details", UserAuth, async (req, res, next) => {
-  //     const { _id } = req.user;
-  //     const { data } = await service.GetShopingDetails(_id);
-
-  //     return res.json(data);
-  //   });
+  app.get("/profile/:id", async (req, res, next) => {
+    const { data } = await service.GetProfile({ _id: req.params.id });
+    res.json(data);
+  });
 
   app.get("/tweet", UserAuth, async (req, res, next) => {
     const { _id } = req.user;

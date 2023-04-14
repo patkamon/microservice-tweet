@@ -25,6 +25,11 @@ class TweetRepository {
     throw new Error("Data Not found!");
   }
 
+  async SpecificTweet(id) {
+    const existingTweet = await TweetModel.find(id);
+    return existingTweet;
+  }
+
   async Delete(userId, _id) {
     const tweets = await OrderModel.findOne({ userId: userId });
 

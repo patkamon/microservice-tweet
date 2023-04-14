@@ -12,6 +12,11 @@ class RetweetService {
     return FormateData(retweetItems);
   }
 
+  async SpecificRetweet(_id) {
+    const retweetItems = await this.repository.SpecificRetweet(_id);
+    return FormateData(retweetItems);
+  }
+
   async GetAllRetweet() {
     const retweetItems = await this.repository.AllRetweet();
     return FormateData(retweetItems);

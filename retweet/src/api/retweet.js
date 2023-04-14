@@ -1,10 +1,10 @@
 const { USER_SERVICE, TWEET_SERVICE } = require("../config");
-const ProductService = require("../services/retweet-service");
+const RetweetService = require("../services/retweet-service");
 const { PublishMessage } = require("../utils");
 const UserAuth = require("./middlewares/auth");
 
 module.exports = (app, channel) => {
-  const service = new ProductService();
+  const service = new RetweetService();
 
   // SubscribeMessage(channel, service);
 
@@ -26,6 +26,12 @@ module.exports = (app, channel) => {
     const { _id } = req.user;
 
     const { data } = await service.GetRetweet({ _id });
+
+    res.status(200).json(data);
+  });
+
+  app.get("/id/:id", async (req, res, next) => {
+    const { data } = await service.SpecificRetweet({ _id: req.params.id });
 
     res.status(200).json(data);
   });
