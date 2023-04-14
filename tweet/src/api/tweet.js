@@ -9,7 +9,7 @@ module.exports = (app, channel) => {
 
   SubscribeMessage(channel, service);
 
-  app.post("/tweet", UserAuth, async (req, res, next) => {
+  app.post("", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
     const { msg } = req.body;
 
@@ -22,7 +22,7 @@ module.exports = (app, channel) => {
     res.status(200).json(data);
   });
 
-  app.get("/tweet", UserAuth, async (req, res, next) => {
+  app.get("", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
 
     const { data } = await service.GetTweet({ _id });
@@ -30,7 +30,13 @@ module.exports = (app, channel) => {
     res.status(200).json(data);
   });
 
-  app.delete("/tweet/:id", UserAuth, async (req, res, next) => {
+  app.get("/all", async (req, res, next) => {
+    const { data } = await service.GetAllTweet();
+
+    res.status(200).json(data);
+  });
+
+  app.delete("/:id", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
     const { data } = await service.Delete(_id, req.params.id);
 

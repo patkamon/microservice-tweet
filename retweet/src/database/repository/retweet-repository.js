@@ -13,6 +13,17 @@ class RetweetRepository {
     throw new Error("Data Not found!");
   }
 
+  async AllRetweet() {
+    const retweetItems = await RetweetModel.find()
+      .sort({ $natural: -1 })
+      .limit(100);
+    if (retweetItems) {
+      return retweetItems;
+    }
+
+    throw new Error("Data Not found!");
+  }
+
   async Delete(userId, _id) {
     const retweet = await OrderModel.findOne({ userId: userId });
 

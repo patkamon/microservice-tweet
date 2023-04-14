@@ -13,6 +13,18 @@ class TweetRepository {
     throw new Error("Data Not found!");
   }
 
+  async AllTweet() {
+    // get latest 100
+    const tweetItems = await TweetModel.find()
+      .sort({ $natural: -1 })
+      .limit(100);
+    if (tweetItems) {
+      return tweetItems;
+    }
+
+    throw new Error("Data Not found!");
+  }
+
   async Delete(userId, _id) {
     const tweets = await OrderModel.findOne({ userId: userId });
 

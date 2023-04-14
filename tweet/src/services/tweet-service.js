@@ -12,6 +12,11 @@ class TweetService {
     return FormateData(tweetItems);
   }
 
+  async GetAllTweet() {
+    const tweetItems = await this.repository.AllTweet();
+    return FormateData(tweetItems);
+  }
+
   async Tweet(userInput) {
     const { _id, msg } = userInput;
 

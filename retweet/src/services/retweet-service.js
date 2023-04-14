@@ -12,6 +12,11 @@ class RetweetService {
     return FormateData(retweetItems);
   }
 
+  async GetAllRetweet() {
+    const retweetItems = await this.repository.AllRetweet();
+    return FormateData(retweetItems);
+  }
+
   async Retweet(userInput) {
     const { _id, id, msg } = userInput;
 
@@ -19,23 +24,6 @@ class RetweetService {
 
     return FormateData(retweetResult);
   }
-
-  // async SubscribeEvents(payload) {
-  //   payload = JSON.parse(payload);
-  //   const { event, data } = payload;
-  //   const { userId, retweet, qty } = data;
-
-  //   switch (event) {
-  //     case "ADD_TO_CART":
-  //       this.ManageCart(userId, retweet, qty, false);
-  //       break;
-  //     case "REMOVE_FROM_CART":
-  //       this.ManageCart(userId, retweet, qty, true);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // }
 
   async Delete(_id, id) {
     const deleteResult = await this.repository.Delete(_id, id);
