@@ -76,6 +76,11 @@ class UserService {
     return FormateData(existingUser);
   }
 
+  async GetAllUser() {
+    const existingUser = await this.repository.AllUser();
+    return FormateData(existingUser);
+  }
+
   async GetTweet(userId) {
     const wishListItems = await this.repository.Tweet(userId);
     return FormateData(wishListItems);

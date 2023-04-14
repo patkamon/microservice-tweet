@@ -52,9 +52,7 @@ class TweetRepository {
 
   async AllTweet() {
     // get latest 100
-    const tweetItems = await TweetModel.find()
-      .sort({ $natural: -1 })
-      .limit(100);
+    const tweetItems = await TweetModel.find();
     if (tweetItems) {
       return tweetItems;
     }

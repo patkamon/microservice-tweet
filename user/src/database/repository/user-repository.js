@@ -44,6 +44,11 @@ class UserRepository {
     return existingUser;
   }
 
+  async AllUser() {
+    const existingUser = await UserModel.find();
+    return existingUser;
+  }
+
   async Tweet(userId) {
     const profile = await UserModel.findById(userId).populate("tweet");
 

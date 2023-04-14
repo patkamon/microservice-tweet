@@ -61,8 +61,7 @@ class RetweetRepository {
 
   async AllRetweet() {
     const retweetItems = await RetweetModel.find()
-      .sort({ $natural: -1 })
-      .limit(100);
+
     if (retweetItems) {
       return retweetItems;
     }

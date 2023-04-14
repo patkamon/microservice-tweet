@@ -38,6 +38,11 @@ module.exports = (app, channel) => {
     res.json(data);
   });
 
+  app.get("/all", async (req, res, next) => {
+    const { data } = await service.GetAllUser();
+    res.json(data);
+  });
+
   app.get("/profile/:id", async (req, res, next) => {
     const { data } = await service.GetProfile({ _id: req.params.id });
     res.json(data);
