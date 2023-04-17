@@ -37,7 +37,7 @@ class UserService {
   }
 
   async SignUp(userInputs) {
-    const { email, password, phone } = userInputs;
+    const { email, username, password, phone } = userInputs;
 
     // create salt
     let salt = await GenerateSalt();
@@ -58,6 +58,7 @@ class UserService {
 
     const existingUser = await this.repository.CreateUser({
       email,
+      username,
       password: userPassword,
       phone,
       salt,
@@ -71,13 +72,14 @@ class UserService {
   }
 
   async AddNewAddress(_id, userInputs) {
-    const { name, desc, img } = userInputs;
+    const { name, desc, img, cover } = userInputs;
 
     const addressResult = await this.repository.CreateProfile({
       _id,
       name,
       desc,
       img,
+      cover,
     });
 
     return FormateData(addressResult);

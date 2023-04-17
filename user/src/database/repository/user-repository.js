@@ -3,9 +3,10 @@ const { UserModel, ProfileModel } = require("../models");
 
 //Dealing with data base operations
 class UserRepository {
-  async CreateUser({ email, password, phone, salt }) {
+  async CreateUser({ email, username, password, phone, salt }) {
     const user = new UserModel({
       email,
+      username,
       password,
       salt,
       phone,
@@ -16,7 +17,7 @@ class UserRepository {
     return userResult;
   }
 
-  async CreateProfile({ _id, name, desc, img }) {
+  async CreateProfile({ _id, name, desc, img, cover }) {
     const profile = await UserModel.findById(_id);
 
     if (profile) {
@@ -24,6 +25,7 @@ class UserRepository {
         name,
         desc,
         img,
+        cover,
       });
 
       await newAddress.save();

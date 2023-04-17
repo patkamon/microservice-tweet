@@ -9,8 +9,8 @@ module.exports = (app, channel) => {
   SubscribeMessage(channel, service);
 
   app.post("/signup", async (req, res, next) => {
-    const { email, password, phone } = req.body;
-    const { data } = await service.SignUp({ email, password, phone });
+    const { email, username, password, phone } = req.body;
+    const { data } = await service.SignUp({ email, username, password, phone });
     res.json(data);
   });
 
@@ -25,9 +25,14 @@ module.exports = (app, channel) => {
   app.post("/profile", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
 
-    const { name, desc, img } = req.body;
+    const { name, desc, img, cover } = req.body;
 
-    const { data } = await service.AddNewAddress(_id, { name, desc, img });
+    const { data } = await service.AddNewAddress(_id, {
+      name,
+      desc,
+      img,
+      cover,
+    });
 
     res.json(data);
   });
