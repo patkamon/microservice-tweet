@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "8a4050f7-c137-430d-9719-98fe96bf743a",
-		"name": "Microservice Tweet",
+		"_postman_id": "bbf7414a-4f14-4bd7-a817-da8b1395fde5",
+		"name": "Microservice Tweet Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "19431105"
 	},
@@ -36,7 +36,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"msg\": \"hello\"\n}",
+							"raw": "{\n    \"msg\": \"hello\",\n    \"photo\": [\"url1\"],\n    \"video\": [\"video1\",\"video2\"]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -73,7 +73,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:80/tweet/f255a6e9-5e9b-40db-976b-a4324e8a944a",
+							"raw": "http://localhost:80/tweet/3da3b269-9562-4576-ad2a-2fe27d90350b",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -81,7 +81,7 @@
 							"port": "80",
 							"path": [
 								"tweet",
-								"f255a6e9-5e9b-40db-976b-a4324e8a944a"
+								"3da3b269-9562-4576-ad2a-2fe27d90350b"
 							]
 						}
 					},
@@ -113,7 +113,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:80/tweet/id/4ebd88ea-8221-4cc4-9c7d-1ff71d8d6cb8",
+							"raw": "http://localhost:80/tweet/id/3da3b269-9562-4576-ad2a-2fe27d90350b",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -122,7 +122,7 @@
 							"path": [
 								"tweet",
 								"id",
-								"4ebd88ea-8221-4cc4-9c7d-1ff71d8d6cb8"
+								"3da3b269-9562-4576-ad2a-2fe27d90350b"
 							]
 						}
 					},
@@ -133,8 +133,17 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:80/tweet/like/f255a6e9-5e9b-40db-976b-a4324e8a944a",
+							"raw": "http://localhost:80/tweet/like/4ebd88ea-8221-4cc4-9c7d-1ff71d8d6cb8",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -143,7 +152,7 @@
 							"path": [
 								"tweet",
 								"like",
-								"f255a6e9-5e9b-40db-976b-a4324e8a944a"
+								"4ebd88ea-8221-4cc4-9c7d-1ff71d8d6cb8"
 							]
 						}
 					},
@@ -164,7 +173,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:80/tweet/comment/4ebd88ea-8221-4cc4-9c7d-1ff71d8d6cb8",
+							"raw": "http://localhost:80/tweet/comment/3da3b269-9562-4576-ad2a-2fe27d90350b",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -173,7 +182,7 @@
 							"path": [
 								"tweet",
 								"comment",
-								"4ebd88ea-8221-4cc4-9c7d-1ff71d8d6cb8"
+								"3da3b269-9562-4576-ad2a-2fe27d90350b"
 							]
 						}
 					},
@@ -191,7 +200,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"test2@test.com\",\n    \"password\":\"12345\",\n    \"phone\":\"12345\"\n}",
+							"raw": "{\n    \"email\":\"test56@test.com\",\n    \"username\": \"patlom\",\n    \"password\":\"12345678S\",\n    \"phone\":\"12345\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -216,11 +225,56 @@
 				{
 					"name": "User_Login",
 					"request": {
+						"auth": {
+							"type": "oauth1",
+							"oauth1": [
+								{
+									"key": "tokenSecret",
+									"value": "B9ajcwsT0PurcnSoaOho69X6SWUDsHBs2jx0taPtP7KFm",
+									"type": "string"
+								},
+								{
+									"key": "token",
+									"value": "1476187982310772736-Jb6fF1S67iZI7TPdVjzmn88t2QedyG",
+									"type": "string"
+								},
+								{
+									"key": "consumerSecret",
+									"value": "HFK5xnQouUmwFLvkPRyMWybZeZTEH1ymbCrgNkwVsoHSbry5JL",
+									"type": "string"
+								},
+								{
+									"key": "consumerKey",
+									"value": "mWDCcA1Hzo2VDW74dX2CTFjOq",
+									"type": "string"
+								},
+								{
+									"key": "signatureMethod",
+									"value": "HMAC-SHA1",
+									"type": "string"
+								},
+								{
+									"key": "version",
+									"value": "1.0",
+									"type": "string"
+								},
+								{
+									"key": "addParamsToHeader",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addEmptyParamsToSign",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"test4@test.com\",\n    \"password\":\"12345\"\n}",
+							"raw": "{\n    \"email\":\"test2@test.com\",\n    \"password\":\"12345\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -309,7 +363,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:80/user/profile/64398487581cf10014f78e74",
+							"raw": "http://localhost:80/user/profile/643d2c32ad57440014d378cc",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -318,7 +372,7 @@
 							"path": [
 								"user",
 								"profile",
-								"64398487581cf10014f78e74"
+								"643d2c32ad57440014d378cc"
 							]
 						}
 					},
@@ -339,6 +393,27 @@
 							"path": [
 								"user",
 								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User_Profile_By_Username",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:80/user/profile/patlom",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "80",
+							"path": [
+								"user",
+								"profile",
+								"patlom"
 							]
 						}
 					},
@@ -547,7 +622,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QyQHRlc3QuY29tIiwiX2lkIjoiNjQzOTc5N2MzMjRjNGUwMDEzNjE4NDhlIiwiaWF0IjoxNjgxNDg4MjUyLCJleHAiOjE2ODQwODAyNTJ9.sUuigDIqHPfSWRtqHO1NHOprIak2I4561zL8sd_EH8E",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3Q1NkB0ZXN0LmNvbSIsIl9pZCI6IjY0M2QzMTJjYWYyNmFmMDAxMzQyNTI1NyIsImlhdCI6MTY4MTczMTg4NCwiZXhwIjoxNjg0MzIzODg0fQ.pX9o9KINJ8b8RXaszniZPR-w5YaMqB1WKXiqgAavTuA",
 				"type": "string"
 			}
 		]
