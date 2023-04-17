@@ -11,9 +11,9 @@ module.exports = (app, channel) => {
 
   app.post("", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
-    const { msg } = req.body;
+    const { msg, photo, video } = req.body;
 
-    const { data } = await service.Tweet({ _id, msg });
+    const { data } = await service.Tweet({ _id, msg, photo, video });
 
     const payload = await service.GetOrderPayload(_id, data, "CREATE_TWEET");
 

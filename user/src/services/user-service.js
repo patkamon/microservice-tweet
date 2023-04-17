@@ -44,6 +44,18 @@ class UserService {
 
     let userPassword = await GeneratePassword(password, salt);
 
+    if (password.length < 8 || password.length > 20) {
+      return FormateData({
+        msg: "Password need to be between 8-20",
+        status: 400,
+      });
+    } else if (password == password.toLowerCase()) {
+      return FormateData({
+        msg: "Password need to contain atleast 1 capital letter",
+        status: 400,
+      });
+    }
+
     const existingUser = await this.repository.CreateUser({
       email,
       password: userPassword,

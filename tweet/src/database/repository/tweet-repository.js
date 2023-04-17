@@ -73,6 +73,7 @@ class TweetRepository {
   async CreateNewTweet(userId, msg, photo, video) {
     //required to verify payment through TxnId
     const _id = uuidv4();
+    console.error(photo, video);
     const tweet = new TweetModel({
       userId,
       _id,
