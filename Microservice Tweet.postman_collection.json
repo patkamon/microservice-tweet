@@ -335,7 +335,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n   \"name\": \"Pat\", \n   \"desc\":\"I'm Thai\", \n   \"img\":\"URL\"\n}",
+							"raw": "{\n   \"name\": \"Pat\", \n   \"desc\":\"I'm Thai\", \n   \"cover\": \"url\",\n   \"img\":\"URL\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -622,7 +622,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3Q1NkB0ZXN0LmNvbSIsIl9pZCI6IjY0M2QzMTJjYWYyNmFmMDAxMzQyNTI1NyIsImlhdCI6MTY4MTczMTg4NCwiZXhwIjoxNjg0MzIzODg0fQ.pX9o9KINJ8b8RXaszniZPR-w5YaMqB1WKXiqgAavTuA",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3Q1NkB0ZXN0LmNvbSIsIl9pZCI6IjY0M2QzNTRhOTMxMjIxMDAxNDQxMDdiMiIsImlhdCI6MTY4MTczMjkzOCwiZXhwIjoxNjg0MzI0OTM4fQ.kxLgx6Bhf5ppyCb9zNMcFuYZRKmHuKFLLHubnpmfmX8",
 				"type": "string"
 			}
 		]
