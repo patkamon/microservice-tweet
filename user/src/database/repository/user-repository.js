@@ -46,6 +46,14 @@ class UserRepository {
     return existingUser;
   }
 
+  async FindUserByUsername({ username }) {
+    console.error(username);
+    const existingUser = await UserModel.findOne({
+      username: username,
+    });
+    return existingUser;
+  }
+
   async AllUser() {
     const existingUser = await UserModel.find();
     return existingUser;

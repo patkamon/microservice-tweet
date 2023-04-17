@@ -48,6 +48,13 @@ module.exports = (app, channel) => {
     res.json(data);
   });
 
+  app.get("/profile/:username", async (req, res, next) => {
+    const { data } = await service.GetProfileByUsername({
+      username: req.params.username,
+    });
+    res.json(data);
+  });
+
   app.get("/profile/:id", async (req, res, next) => {
     const { data } = await service.GetProfile({ _id: req.params.id });
     res.json(data);

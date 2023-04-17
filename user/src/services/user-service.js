@@ -90,6 +90,11 @@ class UserService {
     return FormateData(existingUser);
   }
 
+  async GetProfileByUsername({ username }) {
+    const existingUser = await this.repository.FindUserByUsername({ username });
+    return FormateData(existingUser);
+  }
+
   async GetAllUser() {
     const existingUser = await this.repository.AllUser();
     return FormateData(existingUser);
