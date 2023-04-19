@@ -363,7 +363,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:80/user/profile/643d2c32ad57440014d378cc",
+							"raw": "http://localhost:80/user/profile/id/643d33d268cc4500132ea416",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -372,7 +372,8 @@
 							"path": [
 								"user",
 								"profile",
-								"643d2c32ad57440014d378cc"
+								"id",
+								"643d33d268cc4500132ea416"
 							]
 						}
 					},

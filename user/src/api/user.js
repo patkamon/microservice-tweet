@@ -55,7 +55,7 @@ module.exports = (app, channel) => {
     res.json(data);
   });
 
-  app.get("/profile/:id", async (req, res, next) => {
+  app.get("/profile/id/:id", async (req, res, next) => {
     const { data } = await service.GetProfile({ _id: req.params.id });
     res.json(data);
   });
