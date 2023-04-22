@@ -1,5 +1,5 @@
 # microservice-tweet
-a super small tiny piece of ****
+It's twitter clone for aws microservice project.
 
 
 run `docker-compose up --build`.  
