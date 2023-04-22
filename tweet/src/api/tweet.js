@@ -9,11 +9,11 @@ module.exports = (app, channel) => {
 
   SubscribeMessage(channel, service);
 
-  app.post("/tweet", UserAuth, async (req, res, next) => {
+  app.post("", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
-    const { msg } = req.body;
+    const { msg, photo, video } = req.body;
 
-    const { data } = await service.Tweet({ _id, msg });
+    const { data } = await service.Tweet({ _id, msg, photo, video });
 
     const payload = await service.GetOrderPayload(_id, data, "CREATE_TWEET");
 
@@ -22,7 +22,29 @@ module.exports = (app, channel) => {
     res.status(200).json(data);
   });
 
-  app.get("/tweet", UserAuth, async (req, res, next) => {
+  app.put("/like/:id", UserAuth, async (req, res, next) => {
+    const { _id } = req.user;
+
+    const { data } = await service.LikeTweet(_id, req.params.id);
+
+    res.status(200).json(data);
+  });
+
+  app.put("/comment/:id", UserAuth, async (req, res, next) => {
+    const { _id } = req.user;
+    const { msg } = req.body;
+
+    const { data } = await service.CommentTweet(_id, req.params.id, msg);
+
+    res.status(200).json(data);
+  });
+
+  app.get("/id/:id", async (req, res, next) => {
+    const { data } = await service.SpecificTweet({ _id: req.params.id });
+    res.status(200).json(data);
+  });
+
+  app.get("", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
 
     const { data } = await service.GetTweet({ _id });
@@ -30,7 +52,13 @@ module.exports = (app, channel) => {
     res.status(200).json(data);
   });
 
-  app.delete("/tweet/:id", UserAuth, async (req, res, next) => {
+  app.get("/all", async (req, res, next) => {
+    const { data } = await service.GetAllTweet();
+
+    res.status(200).json(data);
+  });
+
+  app.delete("/:id", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
     const { data } = await service.Delete(_id, req.params.id);
 

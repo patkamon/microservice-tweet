@@ -9,8 +9,8 @@ module.exports = (app, channel) => {
   SubscribeMessage(channel, service);
 
   app.post("/signup", async (req, res, next) => {
-    const { email, password, phone } = req.body;
-    const { data } = await service.SignUp({ email, password, phone });
+    const { email, username, password, phone } = req.body;
+    const { data } = await service.SignUp({ email, username, password, phone });
     res.json(data);
   });
 
@@ -25,9 +25,14 @@ module.exports = (app, channel) => {
   app.post("/profile", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
 
-    const { name, desc, img } = req.body;
+    const { name, desc, img, cover } = req.body;
 
-    const { data } = await service.AddNewAddress(_id, { name, desc, img });
+    const { data } = await service.AddNewAddress(_id, {
+      name,
+      desc,
+      img,
+      cover,
+    });
 
     res.json(data);
   });
@@ -38,12 +43,22 @@ module.exports = (app, channel) => {
     res.json(data);
   });
 
-  //   app.get("/shoping-details", UserAuth, async (req, res, next) => {
-  //     const { _id } = req.user;
-  //     const { data } = await service.GetShopingDetails(_id);
+  app.get("/all", async (req, res, next) => {
+    const { data } = await service.GetAllUser();
+    res.json(data);
+  });
 
-  //     return res.json(data);
-  //   });
+  app.get("/profile/:username", async (req, res, next) => {
+    const { data } = await service.GetProfileByUsername({
+      username: req.params.username,
+    });
+    res.json(data);
+  });
+
+  app.get("/profile/id/:id", async (req, res, next) => {
+    const { data } = await service.GetProfile({ _id: req.params.id });
+    res.json(data);
+  });
 
   app.get("/tweet", UserAuth, async (req, res, next) => {
     const { _id } = req.user;

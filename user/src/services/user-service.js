@@ -37,15 +37,28 @@ class UserService {
   }
 
   async SignUp(userInputs) {
-    const { email, password, phone } = userInputs;
+    const { email, username, password, phone } = userInputs;
 
     // create salt
     let salt = await GenerateSalt();
 
     let userPassword = await GeneratePassword(password, salt);
 
+    if (password.length < 8 || password.length > 20) {
+      return FormateData({
+        msg: "Password need to be between 8-20",
+        status: 400,
+      });
+    } else if (password == password.toLowerCase()) {
+      return FormateData({
+        msg: "Password need to contain atleast 1 capital letter",
+        status: 400,
+      });
+    }
+
     const existingUser = await this.repository.CreateUser({
       email,
+      username,
       password: userPassword,
       phone,
       salt,
@@ -59,13 +72,14 @@ class UserService {
   }
 
   async AddNewAddress(_id, userInputs) {
-    const { name, desc, img } = userInputs;
+    const { name, desc, img, cover } = userInputs;
 
     const addressResult = await this.repository.CreateProfile({
       _id,
       name,
       desc,
       img,
+      cover,
     });
 
     return FormateData(addressResult);
@@ -73,6 +87,16 @@ class UserService {
 
   async GetProfile(id) {
     const existingUser = await this.repository.FindUserById({ id });
+    return FormateData(existingUser);
+  }
+
+  async GetProfileByUsername({ username }) {
+    const existingUser = await this.repository.FindUserByUsername({ username });
+    return FormateData(existingUser);
+  }
+
+  async GetAllUser() {
+    const existingUser = await this.repository.AllUser();
     return FormateData(existingUser);
   }
 

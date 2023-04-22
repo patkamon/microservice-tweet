@@ -1,11 +1,67 @@
 const mongoose = require("mongoose");
-const { RetweetModel, OrderModel } = require("../models");
+const { RetweetModel } = require("../models");
 const { v4: uuidv4 } = require("uuid");
 
 //Dealing with data base operations
 class RetweetRepository {
   async Retweet(userId) {
-    const retweetItems = await OrderModel.find({ userId: userId });
+    const retweetItems = await RetweetModel.find({ userId: userId });
+    if (retweetItems) {
+      return retweetItems;
+    }
+
+    throw new Error("Data Not found!");
+  }
+
+  async SpecificRetweet(id) {
+    const retweetItems = await RetweetModel.find(id);
+    if (retweetItems) {
+      return retweetItems;
+    }
+
+    throw new Error("Data Not found!");
+  }
+
+  async LikeRetweet(userId, retweetId) {
+    const retweets = await RetweetModel.find({ _id: retweetId });
+    const existingRetweet = retweets[0];
+    if (existingRetweet) {
+      let retweetLike = existingRetweet.like;
+      let found = false;
+      console.error(retweetLike);
+      if (retweetLike.length > 0) {
+        retweetLike.map((item) => {
+          if (item.toString() === userId.toString()) {
+            retweetLike.splice(retweetLike.indexOf(item), 1);
+            found = true;
+          }
+        });
+      }
+      if (found !== true) {
+        retweetLike.push(userId);
+      }
+
+      existingRetweet.like = retweetLike;
+      existingRetweet.like_count = retweetLike.length;
+
+      return await existingRetweet.save();
+    } else {
+      return [];
+    }
+  }
+
+  async CommentRetweet(userId, retweetId, msg) {
+    const retweets = await RetweetModel.find({ _id: retweetId });
+    const existingRetweet = retweets[0];
+    const comment = { userId: userId, msg: msg, createdAt: Date.now() };
+    existingRetweet.comment.push(comment);
+
+    return await existingRetweet.save();
+  }
+
+  async AllRetweet() {
+    const retweetItems = await RetweetModel.find()
+
     if (retweetItems) {
       return retweetItems;
     }
@@ -14,31 +70,11 @@ class RetweetRepository {
   }
 
   async Delete(userId, _id) {
-    const retweet = await OrderModel.findOne({ userId: userId });
-
-    if (retweet) {
-      let retweetItems = retweet.retweet;
-
-      if (retweetItems.length > 0) {
-        retweetItems.map((item) => {
-          if (item._id.toString() === _id.toString()) {
-            retweetItems.splice(retweetItems.indexOf(item), 1);
-          }
-        });
-      }
-
-      retweet.retweet = retweetItems;
-
-      return await retweet.save();
-    } else {
-      return [];
-    }
+    const retweets = await RetweetModel.deleteOne({ userId: userId, _id: _id });
+    return `DELETE ${_id}`;
   }
 
   async CreateNewRetweet(userId, id, msg) {
-    //required to verify payment through TxnId
-
-    const retweets = await OrderModel.findOne({ userId: userId });
     const _id = uuidv4();
     const retweet = new RetweetModel({
       userId,
@@ -46,24 +82,8 @@ class RetweetRepository {
       id,
       msg,
     });
-
-    if (retweets) {
-      let retweetItems = retweets.retweet;
-
-      retweetItems.push(retweet);
-      retweets.retweet = retweetItems;
-
-      const retweetResult = await retweet.save();
-      await retweets.save();
-      return retweetResult;
-      //   }
-    }
-    const newRetweet = new OrderModel({
-      userId,
-      retweet: [retweet],
-    });
-    await newRetweet.save();
-    return newRetweet.retweet[0];
+    await retweet.save();
+    return retweet;
   }
 }
 

@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
-const { TweetModel, OrderModel } = require("../models");
+const { TweetModel } = require("../models");
 const { v4: uuidv4 } = require("uuid");
 
 //Dealing with data base operations
 class TweetRepository {
   async Tweet(userId) {
-    const tweetItems = await OrderModel.find({ userId: userId });
+    const tweetItems = await TweetModel.find({ userId: userId });
     if (tweetItems) {
       return tweetItems;
     }
@@ -13,57 +13,77 @@ class TweetRepository {
     throw new Error("Data Not found!");
   }
 
-  async Delete(userId, _id) {
-    const tweets = await OrderModel.findOne({ userId: userId });
-
-    if (tweets) {
-      let tweetItems = tweets.tweet;
-
-      if (tweetItems.length > 0) {
-        tweetItems.map((item) => {
-          console.error(item, _id);
-          if (item._id.toString() === _id.toString()) {
-            tweetItems.splice(tweetItems.indexOf(item), 1);
+  async LikeTweet(userId, tweetId) {
+    const tweets = await TweetModel.find({ _id: tweetId });
+    const existingTweet = tweets[0];
+    if (existingTweet) {
+      let tweetLike = existingTweet.like;
+      let found = false;
+      console.error(tweetLike);
+      if (tweetLike.length > 0) {
+        tweetLike.map((item) => {
+          if (item.toString() === userId.toString()) {
+            tweetLike.splice(tweetLike.indexOf(item), 1);
+            found = true;
           }
         });
       }
-      console.log(tweetItems);
+      if (found !== true) {
+        tweetLike.push(userId);
+      }
 
-      tweets.tweet = tweetItems;
+      existingTweet.like = tweetLike;
+      existingTweet.like_count = tweetLike.length;
 
-      return await tweets.save();
+      return await existingTweet.save();
     } else {
       return [];
     }
   }
 
-  async CreateNewTweet(userId, msg) {
-    //required to verify payment through TxnId
+  async CommentTweet(userId, tweetId, msg) {
+    const tweets = await TweetModel.find({ _id: tweetId });
+    const existingTweet = tweets[0];
+    const comment = { userId: userId, msg: msg, createdAt: Date.now() };
+    existingTweet.comment.push(comment);
 
-    const tweets = await OrderModel.findOne({ userId: userId });
+    return await existingTweet.save();
+  }
+
+  async AllTweet() {
+    // get latest 100
+    const tweetItems = await TweetModel.find();
+    if (tweetItems) {
+      return tweetItems;
+    }
+
+    throw new Error("Data Not found!");
+  }
+
+  async SpecificTweet(id) {
+    const existingTweet = await TweetModel.find(id);
+    return existingTweet;
+  }
+
+  async Delete(userId, _id) {
+    const tweets = await TweetModel.deleteOne({ userId: userId, _id: _id });
+    return `DELETE ${_id}`;
+  }
+
+  async CreateNewTweet(userId, msg, photo, video) {
+    //required to verify payment through TxnId
     const _id = uuidv4();
+    console.error(photo, video);
     const tweet = new TweetModel({
       userId,
       _id,
       msg,
+      photo,
+      video,
     });
 
-    if (tweets) {
-      let tweetItems = tweets.tweet;
-
-      tweetItems.push(tweet);
-      tweets.tweet = tweetItems;
-
-      const tweetResult = await tweet.save();
-      await tweets.save();
-      return tweetResult;
-    }
-    const newTweet = new OrderModel({
-      userId,
-      tweet: [tweet],
-    });
-    await newTweet.save();
-    return newTweet.tweet[0];
+    await tweet.save();
+    return tweet;
   }
 }
 

@@ -1,14 +1,14 @@
 const { USER_SERVICE, TWEET_SERVICE } = require("../config");
-const ProductService = require("../services/retweet-service");
+const RetweetService = require("../services/retweet-service");
 const { PublishMessage } = require("../utils");
 const UserAuth = require("./middlewares/auth");
 
 module.exports = (app, channel) => {
-  const service = new ProductService();
+  const service = new RetweetService();
 
   // SubscribeMessage(channel, service);
 
-  app.post("/retweet", UserAuth, async (req, res, next) => {
+  app.post("", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
     const { id, msg } = req.body;
 
@@ -22,7 +22,24 @@ module.exports = (app, channel) => {
     res.status(200).json(data);
   });
 
-  app.get("/retweet", UserAuth, async (req, res, next) => {
+  app.put("/like/:id", UserAuth, async (req, res, next) => {
+    const { _id } = req.user;
+
+    const { data } = await service.LikeRetweet(_id, req.params.id);
+
+    res.status(200).json(data);
+  });
+
+  app.put("/comment/:id", UserAuth, async (req, res, next) => {
+    const { _id } = req.user;
+    const { msg } = req.body;
+
+    const { data } = await service.CommentRetweet(_id, req.params.id, msg);
+
+    res.status(200).json(data);
+  });
+
+  app.get("", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
 
     const { data } = await service.GetRetweet({ _id });
@@ -30,7 +47,19 @@ module.exports = (app, channel) => {
     res.status(200).json(data);
   });
 
-  app.delete("/retweet/:id", UserAuth, async (req, res, next) => {
+  app.get("/id/:id", async (req, res, next) => {
+    const { data } = await service.SpecificRetweet({ _id: req.params.id });
+
+    res.status(200).json(data);
+  });
+
+  app.get("/all", async (req, res, next) => {
+    const { data } = await service.GetAllRetweet();
+
+    res.status(200).json(data);
+  });
+
+  app.delete("/:id", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
 
     const { data } = await service.Delete(_id, req.params.id);
